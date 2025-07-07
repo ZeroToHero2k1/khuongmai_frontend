@@ -1,0 +1,22 @@
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+.sidebar {
+  z-index: 1045;
+}
+.submenu {
+  background-color: #3a3b3c; /* Màu xám đậm */
+  margin-top: 4px;
+}
+
+.submenu a {
+  font-size: 0.9rem;
+  padding-left: 0.75rem;
+}
