@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import './Sidebar.css';
+import { Link } from 'react-router-dom';
 
 
 // Định nghĩa Props truyền từ App
@@ -78,10 +79,10 @@ const Sidebar: React.FC<Props> = ({ collapsed, visibleOnMobile, onToggle }) => {
           </li>
           {/* Mục 1 */}
           <li className="nav-item mb-2">
-            <a href="#" className="nav-link text-white">
+            <Link to="/customers" className="nav-link text-white">
               <i className="me-2">👤</i>
               {!collapsed && 'Quản lý khách hàng'}
-            </a>
+            </Link>
           </li>
 
           {/* Mục 2 */}
@@ -94,18 +95,18 @@ const Sidebar: React.FC<Props> = ({ collapsed, visibleOnMobile, onToggle }) => {
 
           {/* Mục 3 */}
           <li className="nav-item mb-2">
-            <a href="#" className="nav-link text-white">
+            <Link to="/orders" className="nav-link text-white">
               <i className="me-2">📝</i>
               {!collapsed && 'Quản lý đơn hàng'}
-            </a>
+            </Link>
           </li>
 
           {/* Mục 4 */}
           <li className="nav-item mb-2">
-            <a href="#" className="nav-link text-white">
+            <Link to="/employees" className="nav-link text-white">
               <i className="me-2">🧑‍💼</i>
               {!collapsed && 'Quản lý nhân viên'}
-            </a>
+            </Link>
           </li>
 
           {/* Mục 5: Cài đặt (mục có submenu con) */}

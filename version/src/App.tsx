@@ -4,6 +4,11 @@ import Navbar from './navbar/Navbar';
 
 import './App.css'; // Chứa các class CSS bổ sung như ms-80, ms-250, transition-all
 import Footer from './navbar/Footer';
+import { Route, Routes } from 'react-router-dom';
+import RevenueChart from './pages/RevenueChart';
+import CustomerPage from './pages/CustomerPage';
+import Employee from './pages/Employee';
+import Order from './pages/Order';
 
 const App: React.FC = () => {
   // Trạng thái sidebar trên desktop: thu gọn hay không
@@ -48,8 +53,14 @@ const App: React.FC = () => {
             collapsed ? 'ms-80' : 'ms-250'
           }`}
         >
-          <h3>Chào mừng bạn đến hệ thống CRM</h3>
-          <p>Chỗ này sẽ là chỗ mấy cái chart thống kê báo cáo doanh thu</p>
+          <Routes>
+            <Route path='/' element={<RevenueChart/>}></Route>
+            <Route path='/customers' element={<CustomerPage/>}></Route>
+            <Route path='/employees' element={<Employee/>}></Route>
+            <Route path='/orders' element={<Order/>}></Route>
+          </Routes>
+
+
         </main>
       </div>
 

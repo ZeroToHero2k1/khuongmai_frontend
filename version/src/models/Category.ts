@@ -1,4 +1,7 @@
-export interface Category{
-    categoryId: string;
-    categoryName: string;
+import type { Product } from "./Product";
+
+export interface Category {
+  id?: string;
+  name: string;
+  productList?: Product[];
 }
