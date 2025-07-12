@@ -8,3 +8,10 @@ export interface User {
   employee?: Employee;
   role?: Role;
 }
+
+export interface CreateUserRequest {
+  username: string;
+  password: string;
+  employeeId: string;
+  roleId: string;
+}

@@ -1,10 +1,25 @@
-import React from 'react';
+import { getMyInfo } from '@/services/authService';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
   onMobileToggle: () => void;
 }
 
 const Navbar: React.FC<Props> = ({ onMobileToggle }) => {
+  const[username,setUserName]=useState<string>("");
+
+  const fetchMyInfo=async()=>{
+    try{
+      const data=await getMyInfo();
+      setUserName(data.username);
+    }
+    catch{
+      setUserName("Unknown");
+    }
+  }
+  useEffect(()=>{
+    fetchMyInfo();
+  });
   return (
     <nav className="navbar navbar-light bg-light px-4 d-flex justify-content-between shadow-sm">
       {/* Nút mở sidebar trên mobile */}
@@ -20,14 +35,15 @@ const Navbar: React.FC<Props> = ({ onMobileToggle }) => {
         {/* Nút dropdown chính */}
         <a
           href="#"
-          className="nav-link text-white dropdown-toggle d-flex align-items-center bg-dark rounded px-3 py-2"
+          className="nav-link text-white dropdown-toggle d-flex align-items-center rounded px-3 py-2"
           id="dropdownMyAccount"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
+          style={{background: "linear-gradient(to bottom right,rgb(90, 176, 216),rgb(45, 73, 163))"}}
         >
           <i className="bi bi-person-circle me-2"></i>
-          <span>Admin</span>
+          <span>{username}</span>
         </a>
 
         {/* Danh sách menu con */}

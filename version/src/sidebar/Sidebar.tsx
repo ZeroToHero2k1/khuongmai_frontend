@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import './Sidebar.css';
 import { Link } from 'react-router-dom';
 
@@ -19,6 +19,8 @@ const Sidebar: React.FC<Props> = ({ collapsed, visibleOnMobile, onToggle }) => {
   const sidebarStyle: React.CSSProperties = {
     width: collapsed ? 80 : 250,
     transition: 'width 0.3s',
+    background: "linear-gradient(to bottom right,rgb(90, 176, 216),rgb(45, 73, 163))",
+
   };
 
   return (
@@ -30,15 +32,14 @@ const Sidebar: React.FC<Props> = ({ collapsed, visibleOnMobile, onToggle }) => {
 
       {/* Sidebar */}
       <div
-        className={`sidebar bg-dark text-white p-2 vh-100 d-flex flex-column position-fixed ${
-          visibleOnMobile ? 'd-block' : 'd-none d-md-flex'
-        }`}
+        className={`sidebar text-white p-2 vh-100 d-flex flex-column position-fixed ${visibleOnMobile ? 'd-block' : 'd-none d-md-flex'
+          }`}
         style={sidebarStyle}
       >
         {/* Header: Tên hệ thống + nút thu gọn/mở rộng */}
         <div className="d-flex justify-content-between align-items-center mb-3">
-            {!collapsed && (<span className="fw-bold">Thanh công cụ</span>)}
-          
+          {!collapsed && (<span className="fw-bold">Thanh công cụ</span>)}
+
           <button className="ms-3 btn btn-sm btn-outline-light" onClick={onToggle}>
             {collapsed ? '☰' : '×'}
           </button>
