@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../sidebar/Sidebar';
 import Navbar from '../navbar/Navbar';
 import Footer from '../navbar/Footer';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import '../App.css';
-import { getAccessToken } from '@/utils/auth';
+import { getAccessToken, isHetHanToken } from '@/utils/auth';
 import { Navigate } from 'react-router-dom';
 
 const MainLayout: React.FC = () => {
@@ -14,8 +14,17 @@ const MainLayout: React.FC = () => {
   const handleToggleSidebar = () => setCollapsed(!collapsed);
   const handleToggleMobileSidebar = () => setVisibleOnMobile(!visibleOnMobile);
   const handleCloseMobileSidebar = () => setVisibleOnMobile(false);
+  const navigator=useNavigate();
   const accessToken = getAccessToken();
-
+  useEffect(()=>{
+    const interval=setInterval(()=>{
+      if (accessToken && isHetHanToken(accessToken)) {
+        alert("Phiên đăng nhập của bạn đã hết hạn, vui lòng đăng nhập lại để tiếp tục");
+        navigator("/login");
+      }
+    },1000)
+    return ()=> clearInterval(interval);
+  },[]);
   if (!accessToken) {
     return <Navigate to="/login" />;
   }

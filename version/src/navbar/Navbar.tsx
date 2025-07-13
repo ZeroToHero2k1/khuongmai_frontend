@@ -1,5 +1,7 @@
-import { getMyInfo } from '@/services/authService';
+import { getMyInfo, logOut } from '@/services/authService';
+import { clearAccessToken, getAccessToken } from '@/utils/auth';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   onMobileToggle: () => void;
@@ -7,7 +9,7 @@ interface Props {
 
 const Navbar: React.FC<Props> = ({ onMobileToggle }) => {
   const[username,setUserName]=useState<string>("");
-
+  const navigator=useNavigate();
   const fetchMyInfo=async()=>{
     try{
       const data=await getMyInfo();
@@ -20,6 +22,25 @@ const Navbar: React.FC<Props> = ({ onMobileToggle }) => {
   useEffect(()=>{
     fetchMyInfo();
   });
+
+
+  const handleLogOut = async () => {
+    const token = getAccessToken() ?? "";
+    try{
+      const message=await logOut(token);
+      clearAccessToken();
+      navigator("/login");
+      alert(message);
+    }catch(error:unknown){
+      if(error instanceof Error){
+        alert(error);
+      }
+      else{
+        alert("Đăng xuất thất bại, vui lòng thử lại sau");
+      }
+    }
+  }
+
   return (
     <nav className="navbar navbar-light bg-light px-4 d-flex justify-content-between shadow-sm">
       {/* Nút mở sidebar trên mobile */}
@@ -52,7 +73,7 @@ const Navbar: React.FC<Props> = ({ onMobileToggle }) => {
             <a className="dropdown-item" href="#">Thông tin của tôi</a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">Đăng xuất</a>
+            <a className="dropdown-item" onClick={handleLogOut} href="#">Đăng xuất</a>
           </li>
         </ul>
       </div>

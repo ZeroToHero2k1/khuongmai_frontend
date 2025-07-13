@@ -6,6 +6,7 @@ interface AuthResponse {
     result: {
         token: string;
     };
+    message?: string;
 }
 type AxiosErrorLike = {
     response?: {
@@ -29,11 +30,11 @@ export const login = async (username: string, password: string) => {
         const token = res.data.result.token;
         setAccessToken(token);
         return token;
-    }catch(error: unknown){
+    } catch (error: unknown) {
         let message = "Đăng nhập thất bại";
         const err = error as AxiosErrorLike;
-        if(err.response?.data?.message){
-            message=err.response.data.message;
+        if (err.response?.data?.message) {
+            message = err.response.data.message;
         }
 
         throw new Error(message);
@@ -65,45 +66,30 @@ export const signUp = async (name: string, phone: string, username: string, pass
 }
 
 
+export const logOut = async (token: string) => {
+    try {
+        const res = await axios.post<AuthResponse>("http://localhost:8080/khuongmai/auth/logout", {
+            token
+        });
 
+        const message = res.data.message;
+        return message;
+    }
+    catch (error: unknown) {
+        let message = "Đăng ký thất bại";
 
+        const err = error as AxiosErrorLike;
+        if (err.response?.data?.message) {
+            message = err.response.data.message;
+        }
 
+        throw new Error(message);
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export const getMyInfo=async ()=>{
-    try{
-        const res=await api.get("/user/myinfo");
+export const getMyInfo = async () => {
+    try {
+        const res = await api.get("/user/myinfo");
         return res.data.result;
     }
     catch (error: unknown) {
