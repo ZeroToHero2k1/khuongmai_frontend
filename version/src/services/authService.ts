@@ -1,6 +1,7 @@
 import axios from "axios";
 import { setAccessToken } from "@/utils/auth";
 import api from "@/api/axios";
+import type { UpdateMyInfoRequest } from "@/models";
 
 interface AuthResponse {
     result: {
@@ -8,7 +9,7 @@ interface AuthResponse {
     };
     message?: string;
 }
-type AxiosErrorLike = {
+export type AxiosErrorLike = {
     response?: {
         data?: {
             message?: string;
@@ -93,7 +94,7 @@ export const getMyInfo = async () => {
         return res.data.result;
     }
     catch (error: unknown) {
-        let message = "Đăng ký thất bại";
+        let message = "Lấy thông tin thất bại";
 
         const err = error as AxiosErrorLike;
         if (err.response?.data?.message) {
@@ -102,4 +103,22 @@ export const getMyInfo = async () => {
 
         throw new Error(message);
     }
+}
+
+export const updateMyInfo = async (data: UpdateMyInfoRequest, file?: File) => {
+    const formData = new FormData();
+
+    formData.append("myinfo", JSON.stringify(data));
+
+    if (file) {
+        formData.append("image", file);
+    }
+
+    const rest = await api.post("auth/updateinfo", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    })
+    return rest.data;
+
 }

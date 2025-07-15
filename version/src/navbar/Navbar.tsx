@@ -1,7 +1,7 @@
 import { getMyInfo, logOut } from '@/services/authService';
 import { clearAccessToken, getAccessToken } from '@/utils/auth';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 interface Props {
   onMobileToggle: () => void;
@@ -13,7 +13,8 @@ const Navbar: React.FC<Props> = ({ onMobileToggle }) => {
   const fetchMyInfo=async()=>{
     try{
       const data=await getMyInfo();
-      setUserName(data.username);
+      console.log("DATA:", data); // debug thử
+      setUserName(data.user.username || "Unknown");
     }
     catch{
       setUserName("Unknown");
@@ -70,7 +71,7 @@ const Navbar: React.FC<Props> = ({ onMobileToggle }) => {
         {/* Danh sách menu con */}
         <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMyAccount">
           <li>
-            <a className="dropdown-item" href="#">Thông tin của tôi</a>
+            <Link to="/myprofile" className="dropdown-item">Thông tin của tôi</Link>
           </li>
           <li>
             <a className="dropdown-item" onClick={handleLogOut} href="#">Đăng xuất</a>

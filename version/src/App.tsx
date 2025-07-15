@@ -6,6 +6,7 @@ import EmployeePage from "./pages/EmployeePage";
 import OrderPage from "./pages/OrderPage";
 import MainLayout from "./layout/MainLayout";
 import SignUpPage from "./pages/SignUpPage";
+import MyProfilePage from "./pages/MyProfilePage";
 
 const App = () => {
 
@@ -17,6 +18,7 @@ const App = () => {
       {/* Bỏ token check ở đây */}
       <Route path="/" element={<MainLayout />}>
         <Route index element={<RevenueChart />} />
+        <Route path="myprofile" element={<MyProfilePage/>}/>
         <Route path="customers" element={<CustomerPage />} />
         <Route path="employees" element={<EmployeePage />} />
         <Route path="orders" element={<OrderPage />} />

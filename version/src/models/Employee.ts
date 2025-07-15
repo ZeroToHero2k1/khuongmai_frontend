@@ -7,8 +7,10 @@ export interface Employee {
   name: string;
   phone: string;
   department?: Department;
-  dateJoined?: Date;
+  departmentName?:string;
+  dateJoined?: string;
   status?: boolean;
   user?: User;
   tasks?: Task[];
+  imageUrl: string;
 }

@@ -15,3 +15,9 @@ export interface CreateUserRequest {
   employeeId: string;
   roleId: string;
 }
+
+export interface UpdateMyInfoRequest{
+  name: string;
+  phone: string;
+  departmentName: string;
+}
