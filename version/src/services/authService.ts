@@ -113,12 +113,22 @@ export const updateMyInfo = async (data: UpdateMyInfoRequest, file?: File) => {
     if (file) {
         formData.append("image", file);
     }
+    try {
+        const rest = await api.post("auth/updateinfo", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        return rest.data;
+    } catch (error: unknown) {
+        let message = "Sửa thông tin thất bại";
 
-    const rest = await api.post("auth/updateinfo", formData, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-        },
-    })
-    return rest.data;
+        const err = error as AxiosErrorLike;
+        if (err.response?.data?.message) {
+            message = err.response.data.message;
+        }
+
+        throw new Error(message);
+    }
 
 }

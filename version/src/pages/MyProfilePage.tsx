@@ -16,6 +16,7 @@ const MyProfilePage: React.FC = () => {
         departmentName: "",
         dateJoined: "",
         imageUrl: "",
+        roleName:"",
     })
     async function getData() {
         const result = await getMyInfo();
@@ -25,6 +26,7 @@ const MyProfilePage: React.FC = () => {
             phone: result.user.employee.phone,
             departmentName: result.departmentName,
             dateJoined: result.user.employee.dateJoined,
+            roleName:result.roleName,
             imageUrl: result.user.employee.imageUrl
         })
     }
@@ -44,12 +46,10 @@ const MyProfilePage: React.FC = () => {
             }
         }
 
-
     }, 300)
 
 
     useEffect(() => {
-
         getData();
     }, [])
 
@@ -96,7 +96,7 @@ const MyProfilePage: React.FC = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="d-flex align-items-center justify-content-center">
             <div className="container my-4">
                 <div className="row">
                     {/* ẢNH BÊN TRÁI */}
@@ -172,6 +172,14 @@ const MyProfilePage: React.FC = () => {
                             <input
                                 className="form-control"
                                 value={form.dateJoined}
+                                disabled
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Chức vụ</label>
+                            <input
+                                className="form-control"
+                                value={form.roleName}
                                 disabled
                             />
                         </div>

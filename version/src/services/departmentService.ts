@@ -22,3 +22,19 @@ export const searchByDepartmentName = async (departmentName: string) => {
         throw new Error(message);
     }
 }
+
+export const showAllDepartment= async() =>{
+    try{
+        const res= await api.get("/department/getAll")
+        return res.data.result;
+    } catch (error: unknown) {
+        let message = "Lấy thông tin thất bại";
+
+        const err = error as AxiosErrorLike;
+        if (err.response?.data?.message) {
+            message = err.response.data.message;
+        }
+
+        throw new Error(message);
+    }
+}

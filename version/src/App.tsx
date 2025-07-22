@@ -7,6 +7,7 @@ import OrderPage from "./pages/OrderPage";
 import MainLayout from "./layout/MainLayout";
 import SignUpPage from "./pages/SignUpPage";
 import MyProfilePage from "./pages/MyProfilePage";
+import EmployeeEditPage from "./pages/EmployeeEditPage";
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="customers" element={<CustomerPage />} />
         <Route path="employees" element={<EmployeePage />} />
         <Route path="orders" element={<OrderPage />} />
+        <Route path="employees/edit/:id" element={<EmployeeEditPage/>}/>
       </Route>
 
       <Route path="*" element={<Navigate to="/" />} />
