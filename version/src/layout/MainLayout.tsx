@@ -8,8 +8,8 @@ import { getAccessToken, isHetHanToken } from '@/utils/auth';
 import { Navigate } from 'react-router-dom';
 
 const MainLayout: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const [visibleOnMobile, setVisibleOnMobile] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
+  const [visibleOnMobile, setVisibleOnMobile] = useState(true);
 
   const handleToggleSidebar = () => setCollapsed(!collapsed);
   const handleToggleMobileSidebar = () => setVisibleOnMobile(!visibleOnMobile);

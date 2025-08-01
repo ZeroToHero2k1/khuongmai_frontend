@@ -39,7 +39,7 @@ const MyProfilePage: React.FC = () => {
         } else {
             try {
                 const res = await searchByDepartmentName(query);
-                setDepartmentList(res.map((d: Department) => d.name))
+                setDepartmentList(res.content.map((d: Department) => d.name))
                 setShowDepart(true);
             } catch {
                 alert("Lỗi tìm kiếm phòng ban");

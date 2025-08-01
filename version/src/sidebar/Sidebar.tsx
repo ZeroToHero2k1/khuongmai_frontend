@@ -15,6 +15,7 @@ const Sidebar: React.FC<Props> = ({ collapsed, visibleOnMobile, onToggle }) => {
   // Trạng thái để mở/đóng phần "Cài đặt"
   const [settingOpen, setSettingOpen] = useState(false);
   const [stockOpen, setStockOpen] = useState(false);
+  const [dataOpen, setDataOpen] = useState(false);
   // Style cho sidebar để đổi chiều rộng khi thu gọn
   const sidebarStyle: React.CSSProperties = {
     width: collapsed ? 80 : 250,
@@ -78,6 +79,46 @@ const Sidebar: React.FC<Props> = ({ collapsed, visibleOnMobile, onToggle }) => {
               </ul>
             )}
           </li>
+          <li className="nav-item mb-2">
+            {/* Dòng "Cài đặt" có thể click để mở submenu */}
+            <div
+              className="nav-link text-white d-flex align-items-center"
+              style={{ cursor: 'pointer' }}
+              onClick={() => setDataOpen(!dataOpen)}
+            >
+              <i className="me-2">💾</i>
+              {!collapsed && (
+                <div className="d-flex justify-content-between w-100">
+                  <span>Quản lý dữ liệu nền</span>
+                  {/* Hiển thị icon xổ xuống hoặc sang ngang */}
+                  <i className={`bi ${dataOpen ? 'bi-chevron-down' : 'bi-chevron-right'}`}></i>
+                </div>
+              )}
+            </div>
+
+            {!collapsed && dataOpen && (
+              <ul className="submenu list-unstyled ps-3 py-2 rounded">
+                <li className="mt-2">
+                  <Link to="/warehouse" className="nav-link text-white p-0">Danh sách kho</Link>
+                </li>
+                <li className="mt-2">
+                  <Link to="/department" className="nav-link text-white p-0">Danh sách trụ sở</Link>
+                </li>
+                <li className="mt-2">
+                  <a href="#" className="nav-link text-white p-0">Danh sách khách hàng</a>
+                </li>
+                <li className="mt-2">
+                  <a href="#" className="nav-link text-white p-0">Danh sách nguyên liệu</a>
+                </li>
+                <li className="mt-2">
+                  <a href="#" className="nav-link text-white p-0">Các danh mục sản phẩm</a>
+                </li>
+                <li className="mt-2">
+                  <a href="#" className="nav-link text-white p-0">Danh sách công việc</a>
+                </li>
+              </ul>
+            )}
+          </li>
           {/* Mục 1 */}
           <li className="nav-item mb-2">
             <Link to="/customers" className="nav-link text-white">
@@ -136,6 +177,12 @@ const Sidebar: React.FC<Props> = ({ collapsed, visibleOnMobile, onToggle }) => {
                 </li>
                 <li className="mt-2">
                   <a href="#" className="nav-link text-white p-0">Cài đặt quyền tài khoản</a>
+                </li>
+                <li className="mt-2">
+                  <a href="#" className="nav-link text-white p-0">Danh sách quyền</a>
+                </li>
+                <li className="mt-2">
+                  <a href="#" className="nav-link text-white p-0">Danh sách chức năng</a>
                 </li>
               </ul>
             )}

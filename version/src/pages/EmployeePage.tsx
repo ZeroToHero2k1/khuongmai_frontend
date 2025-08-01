@@ -13,7 +13,8 @@ const EmployeePage: React.FC = () => {
   const [employeeList, setEmployeeList] = useState<Employee[]>([])
   const [pageInfo, setPageInfo] = useState({
     currentPage: 0,
-    totalPages: 0
+    totalPages: 0,
+    pageSize: 0
   })
   const [form, setForm] = useState<Employee>({
     name: "",
@@ -43,6 +44,7 @@ const EmployeePage: React.FC = () => {
       setPageInfo({
         currentPage: res.number,
         totalPages: res.totalPages,
+        pageSize: res.size, 
       })
     }
     catch (err: unknown) {
@@ -61,6 +63,7 @@ const EmployeePage: React.FC = () => {
       setPageInfo({
         currentPage: res.number,
         totalPages: res.totalPages,
+        pageSize: res.size,
       })
     }
     catch (err: unknown) {
@@ -140,6 +143,7 @@ const EmployeePage: React.FC = () => {
       <Table striped bordered hover responsive>
         <thead>
           <tr className="text-center">
+            <th>STT</th>
             <th>Tên</th>
             <th>Điện thoại</th>
             <th>Phòng ban</th>
@@ -151,8 +155,9 @@ const EmployeePage: React.FC = () => {
         </thead>
         <tbody>
           {employeeList.length > 0 ? (
-            employeeList.map((employee) => (
+            employeeList.map((employee,index) => (
               <tr key={employee.id}>
+                <td className="text-center">{pageInfo.currentPage * pageInfo.pageSize + index + 1}</td>
                 <td>{employee.name}</td>
                 <td>{employee.phone}</td>
                 <td>{employee.departmentName}</td>

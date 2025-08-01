@@ -4,4 +4,6 @@ export interface Warehouse {
   location?: string;
   managerName?: string;
   phone?: string;
+  existExportReceipts?: boolean;
+  existImportReceipts?: boolean;
 }

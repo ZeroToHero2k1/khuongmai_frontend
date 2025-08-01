@@ -1,13 +1,14 @@
-
+import api from "@/api/axios"
 import type { AxiosErrorLike } from "./authService";
-import api from "@/api/axios";
 
-export const searchByDepartmentName = async (departmentName: string,page?: number) => {
+export const searchWarehouses = async (name: string, managerName: string, phone: string, page: number) => {
     try {
-        const res = await api.get("/department", {
+        const res = await api.get("/warehouse", {
             params: {
-                keyword: departmentName,
-                page: page
+                name: name
+                , managerName: managerName
+                , phone: phone
+                , page: page
             }
         })
         return res.data.result;
@@ -23,26 +24,10 @@ export const searchByDepartmentName = async (departmentName: string,page?: numbe
     }
 }
 
-export const showAllDepartment= async() =>{
-    try{
-        const res= await api.get("/department/getAll")
-        return res.data.result;
+export const deleteWarehouse = async (id: string) => {
+    try {
+        await api.delete(`/warehouse/${id}`)
     } catch (error: unknown) {
-        let message = "Lấy thông tin thất bại";
-
-        const err = error as AxiosErrorLike;
-        if (err.response?.data?.message) {
-            message = err.response.data.message;
-        }
-
-        throw new Error(message);
-    }
-}
-
-export const deleteDepartment=async(id: string)=>{
-    try{
-        await api.delete(`/department/${id}`)
-    }catch (error: unknown) {
         let message = "Xóa thông tin thất bại";
 
         const err = error as AxiosErrorLike;
@@ -54,13 +39,13 @@ export const deleteDepartment=async(id: string)=>{
     }
 }
 
-export const createDepartment=async(departmentName: string)=>{
+export const createWarehouse=async (name: string, location: string, managerName: string, phone: string)=>{
     try{
-        await api.post("/department",{
-            departmentName
+        await api.post("/warehouse",{
+            name, location,managerName,phone
         })
     }catch (error: unknown) {
-        let message = "Tạo dữ liệu thất bại";
+        let message = "Tạo thông tin thất bại";
 
         const err = error as AxiosErrorLike;
         if (err.response?.data?.message) {
@@ -71,12 +56,12 @@ export const createDepartment=async(departmentName: string)=>{
     }
 }
 
-export const findDepartmentById=async(id: string)=>{
-    try{
-        const res=await api.get(`/department/${id}`)
+export const getWarehouseById=async(id: string)=>{
+    try {
+        const res= await api.get(`/warehouse/${id}`)
         return res.data;
-    }catch (error: unknown) {
-        let message = "Tìm dữ liệu thất bại";
+    } catch (error: unknown) {
+        let message = "Tìm thông tin thất bại";
 
         const err = error as AxiosErrorLike;
         if (err.response?.data?.message) {
@@ -87,13 +72,13 @@ export const findDepartmentById=async(id: string)=>{
     }
 }
 
-export const updateDepartment=async(id: string,departmentName: string)=>{
+export const updateWarehouse=async(id: string,name: string, location: string, managerName: string, phone: string)=>{
     try{
-        await api.put(`/department/${id}`,{
-            departmentName
+        await api.put(`/warehouse/${id}`,{
+            name, location,managerName,phone
         })
     }catch (error: unknown) {
-        let message = "Cập nhật dữ liệu thất bại";
+        let message = "Tạo thông tin thất bại";
 
         const err = error as AxiosErrorLike;
         if (err.response?.data?.message) {

@@ -8,6 +8,12 @@ import MainLayout from "./layout/MainLayout";
 import SignUpPage from "./pages/SignUpPage";
 import MyProfilePage from "./pages/MyProfilePage";
 import EmployeeEditPage from "./pages/EmployeeEditPage";
+import WarehousePage from "./pages/WarehousePage";
+import WarehouseCreatePage from "./pages/WarehouseCreatePage";
+import WarehouseEditPage from "./pages/WarehousEditPage";
+import DepartmentPage from "./pages/DepartmentPage";
+import DepartmentCreatePage from "./pages/DepartmentCreatePage";
+import DepartmentEditPage from "./pages/DepartmentEditPage";
 
 const App = () => {
 
@@ -16,7 +22,6 @@ const App = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/sign" element={<SignUpPage />} />
 
-      {/* Bỏ token check ở đây */}
       <Route path="/" element={<MainLayout />}>
         <Route index element={<RevenueChart />} />
         <Route path="myprofile" element={<MyProfilePage/>}/>
@@ -24,6 +29,12 @@ const App = () => {
         <Route path="employees" element={<EmployeePage />} />
         <Route path="orders" element={<OrderPage />} />
         <Route path="employees/edit/:id" element={<EmployeeEditPage/>}/>
+        <Route path="warehouse" element={<WarehousePage/>}></Route>
+        <Route path="warehouse/create" element={<WarehouseCreatePage/>}></Route>
+        <Route path="warehouse/edit/:id" element={<WarehouseEditPage/>}></Route>
+        <Route path="department" element={<DepartmentPage/>}></Route>
+        <Route path="department/create" element={<DepartmentCreatePage/>}></Route>
+        <Route path="department/edit/:id" element={<DepartmentEditPage/>}></Route>
       </Route>
 
       <Route path="*" element={<Navigate to="/" />} />
